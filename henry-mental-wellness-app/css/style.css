@@ -1,10 +1,307 @@
-/* Mental Wellness App Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+/* css/style.css */
+:root {
+  --sky-blue: #7ec8e3;
+  --mint-green: #b4e2c8;
+  --lavender: #d8c7ff;
+  --white: #ffffff;
+  --dark-slate: #2d3748;
+  --light-gray: #f7fafc;
 }
 
-h1 {
-    color: #333;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--light-gray);
+  color: var(--dark-slate);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header */
+.header {
+  background: var(--white);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--sky-blue);
+}
+
+.logo__heart { font-size: 1.5rem; }
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: var(--dark-slate);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav__link:hover, .nav__link.active {
+  color: var(--sky-blue);
+}
+
+.nav__link.crisis {
+  background: #e53e3e;
+  color: white !important;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+/* Hero Quote */
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--sky-blue), var(--lavender));
+  color: white;
+  border-radius: 16px;
+  margin: 2rem 0;
+}
+
+#quote-text {
+  font-size: 2rem;
+  font-weight: 600;
+  max-width: 800px;
+  margin: 0 auto 1rem;
+}
+
+#quote-author {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Mood & Encouragement */
+.quick-actions {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.mood-grid button {
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mood-grid button:hover {
+  transform: translateY(-4px);
+}
+
+.encouragement {
+  font-size: 1.4rem;
+  color: var(--dark-slate);
+  font-weight: 500;
+  min-height: 60px;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.mood-grid button:active {
+  transform: scale(0.95);
+}
+
+/* Features */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card h3 {
+  color: var(--sky-blue);
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 3rem 0;
+  background: var(--dark-slate);
+  color: white;
+  margin-top: 5rem;
+}
+
+.btn-secondary {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid white;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header__inner { flex-direction: column; height: auto; padding: 1rem 0; }
+  .nav { margin-top: 1rem; }
+  #quote-text { font-size: 1.5rem; }
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.8rem;
+  color: var(--sky-blue);
+  margin: 2rem 0 0.5rem;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--dark-slate);
+  opacity: 0.8;
+  margin-bottom: 3rem;
+}
+
+.tracker-form {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  color: var(--dark-slate);
+}
+
+.mood-select {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mood-select button {
+  padding: 1rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.mood-select button.selected {
+  background: var(--sky-blue);
+  color: white;
+  border-color: var(--sky-blue);
+  transform: scale(1.05);
+}
+
+input[type="number"], input[type="range"], textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+}
+
+input[type="range"] {
+  height: 50px;
+}
+
+#energy-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--sky-blue);
+  margin-left: 1rem;
+}
+
+.btn-primary {
+  background: var(--sky-blue);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.history .entry {
+  background: var(--light-gray);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border-left: 5px solid var(--sky-blue);
+}
+
+@media (max-width: 768px) {
+  .charts { grid-template-columns: 1fr; }
 }

@@ -1,13 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Help - Mental Wellness App</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Help Near You | HenMo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    #map { height: 70vh; border-radius: 16px; margin: 2rem 0; }
+    .mapboxgl-popup-content {
+      padding: 1.5rem;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+    }
+    .mapboxgl-popup-close-button { font-size: 1.5rem; }
+  </style>
 </head>
 <body>
-    <h1>Find Help</h1>
-    <script src="js/main.js"></script>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo">
+        <span class="logo__heart">❤️</span>
+        <h1>HenMo</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="find-help.html" class="nav__link active">Find Help</a>
+        <a href="tracker.html" class="nav__link">Tracker</a>
+        <a href="education.html" class="nav__link">Learn</a>
+        <a href="crisis.html" class="nav__link crisis">Get Help Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Find Therapists & Clinics Near You</h1>
+    <p class="page-subtitle">You don't have to face this alone. Help is closer than you think.</p>
+
+    <div class="card search-controls">
+      <div class="form-group">
+        <label>Search by city or location</label>
+        <input type="text" id="location-input" placeholder="e.g. Lagos, New York, London..." />
+        <button id="search-btn" class="btn-primary">Search Location</button>
+      </div>
+      <p style="margin-top:1rem; color:#666;">
+        <strong>Or click "Use My Location"</strong> to find help near you right now:
+        <button id="geolocate-btn" class="btn-secondary" style="margin-left:1rem;">Use My Location</button>
+      </p>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="card saved-locations">
+      <h2>Your Saved Locations</h2>
+      <div id="saved-list"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Made with ❤️ by Henry Ugochukwu | You are not alone.</p>
+  </footer>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.css" type="text/css">
+
+  <script type="module" src="js/modules/map.js"></script>
 </body>
 </html>

@@ -1,13 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracker - Mental Wellness App</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wellness Tracker | HenMo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Chart.js for beautiful charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Mood Tracker</h1>
-    <script src="js/main.js"></script>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo">
+        <span class="logo__heart">❤️</span>
+        <h1>HenMo</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="find-help.html" class="nav__link">Find Help</a>
+        <a href="tracker.html" class="nav__link active">Tracker</a>
+        <a href="education.html" class="nav__link">Learn</a>
+        <a href="crisis.html" class="nav__link crisis">Get Help Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Your Wellness Tracker</h1>
+    <p class="page-subtitle">Log how you're feeling today. Track your growth. Celebrate your progress.</p>
+
+    <section class="tracker-form card">
+      <h2>Log Today's Entry</h2>
+      <form id="wellness-form">
+        <div class="form-group">
+          <label>How are you feeling today?</label>
+          <div class="mood-select">
+            <button type="button" data-mood="happy">😊 Happy</button>
+            <button type="button" data-mood="calm">😌 Calm</button>
+            <button type="button" data-mood="okay">😐 Okay</button>
+            <button type="button" data-mood="sad">😔 Sad</button>
+            <button type="button" data-mood="anxious">😰 Anxious</button>
+          </div>
+          <input type="hidden" id="selected-mood" required />
+        </div>
+
+        <div class="form-group">
+          <label>Hours of sleep last night</label>
+          <input type="number" id="sleep" min="0" max="24" step="0.5" placeholder="e.g. 7.5" required />
+        </div>
+
+        <div class="form-group">
+          <label>Energy level (1–10)</label>
+          <input type="range" id="energy" min="1" max="10" value="5" />
+          <span id="energy-value">5</span>
+        </div>
+
+        <div class="form-group">
+          <label>One thing you're grateful for today</label>
+          <textarea id="gratitude" rows="3" placeholder="e.g. My family, a warm meal, a kind message..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Save Today's Entry</button>
+      </form>
+    </section>
+
+    <section class="charts">
+      <div class="card">
+        <h2>Mood Trend (Last 7 Days)</h2>
+        <canvas id="moodChart"></canvas>
+      </div>
+      <div class="card">
+        <h2>Sleep & Energy</h2>
+        <canvas id="sleepEnergyChart"></canvas>
+      </div>
+    </section>
+
+    <section class="history card">
+      <h2>Your Past Entries</h2>
+      <div id="entries-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with ❤️ by Henry Ugochukwu | You are growing, even on quiet days.</p>
+  </footer>
+
+  <script type="module" src="js/modules/tracker.js"></script>
 </body>
 </html>
