@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education - Mental Wellness App</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learn & Grow | HenMo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <h1>Education</h1>
-    <script src="js/main.js"></script>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo">
+        <span class="logo__heart">❤️</span>
+        <h1>HenMo</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="find-help.html" class="nav__link">Find Help</a>
+        <a href="tracker.html" class="nav__link">Tracker</a>
+        <a href="education.html" class="nav__link active">Learn</a>
+        <a href="crisis.html" class="nav__link crisis">Get Help Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Learn & Grow</h1>
+    <p class="page-subtitle">Free mental health education, articles, and trusted books — all in one place.</p>
+
+    <!-- Google Books Search -->
+    <section class="card search-section">
+      <h2>Search Mental Health Books</h2>
+      <div class="form-group">
+        <input type="text" id="book-search" placeholder="e.g. anxiety, depression, self-love, trauma..." />
+        <button id="search-books-btn" class="btn-primary">Search Books</button>
+      </div>
+      <div id="books-results" class="books-grid"></div>
+    </section>
+
+    <!-- Curated Articles -->
+    <section class="articles-section">
+      <h2>Hand-Picked Articles for You</h2>
+      <div class="articles-grid" id="articles-grid">
+        <!-- Articles will be loaded here by education.js -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with ❤️ by Henry Ugochukwu | Knowledge is the first step to healing.</p>
+  </footer>
+
+  <script type="module" src="js/modules/education.js"></script>
 </body>
 </html>
