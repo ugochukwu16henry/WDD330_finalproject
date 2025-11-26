@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HenMo | Global Counseling & Wellness</title>
+  <meta name="description" content="Daily motivation, therapist finder, wellness tracker, and mental health resources in one place." />
+
+  <!-- Google Fonts: Poppins + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Mapbox CSS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo">
+        <span class="logo__heart">❤️</span>
+        <h1>HenMo</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav__link active">Home</a>
+        <a href="find-help.html" class="nav__link">Find Help</a>
+        <a href="tracker.html" class="nav__link">Tracker</a>
+        <a href="education.html" class="nav__link">Learn</a>
+        <a href="crisis.html" class="nav__link crisis">Get Help Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Daily Quote Section -->
+    <section class="hero">
+      <h2 id="quote-text">Loading your daily motivation...</h2>
+      <p id="quote-author"></p>
+      <button id="save-quote" class="btn-secondary">♡ Save Quote</button>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <h2>How are you feeling today?</h2>
+      <div class="mood-grid">
+        <button data-mood="anxious">Anxious</button>
+        <button data-mood="sad">Sad</button>
+        <button data-mood="stressed">Stressed</button>
+        <button data-mood="calm">Calm</button>
+        <button data-mood="happy">Happy</button>
+        <button data-mood="overwhelmed">Overwhelmed</button>
+      </div>
+      <p id="encouragement" class="encouragement"></p>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="features">
+      <a href="find-help.html" class="card">
+        <h3>Find Therapists Near You</h3>
+        <p>Search counselors and clinics on an interactive map</p>
+      </a>
+      <a href="tracker.html" class="card">
+        <h3>Wellness Tracker</h3>
+        <p>Log mood, sleep, gratitude & track progress</p>
+      </a>
+      <a href="education.html" class="card">
+        <h3>Learn & Grow</h3>
+        <p>Articles, books, and coping strategies</p>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with ❤️ by Henry Ugochukwu | Helping the world one mind at a time</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
