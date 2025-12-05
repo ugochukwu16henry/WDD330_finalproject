@@ -3,6 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidWdvY2h1a3d1aGVucnkiLCJhIjoiY21pZzIyMHNkMDJ1c
 
 let map;
 let userMarker;
+let markers = []; // Store all markers so we can remove them properly
 
 const defaultCenter = [-74.0059, 40.7128]; // Default: New York (will change to user)
 
@@ -33,65 +34,83 @@ function initMap() {
   // Load saved locations
   loadSavedLocations();
 
-  // Custom event listeners
-  const searchBtn = document.getElementById('search-btn');
-  const geoBtn = document.getElementById('geolocate-btn');
-  const locationInput = document.getElementById('location-input');
-
-  console.log('Elements found:', { searchBtn, geoBtn, locationInput });
-
-  if (searchBtn) {
-    searchBtn.addEventListener('click', () => {
-      console.log('Search button clicked');
-      const query = locationInput.value.trim();
-      if (query) {
-        console.log('Searching for:', query);
-        // Use Mapbox Geocoding API directly
-        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxgl.accessToken}`)
-          .then(response => response.json())
-          .then(data => {
-            console.log('Geocoding result:', data);
-            if (data.features && data.features.length > 0) {
-              const [lng, lat] = data.features[0].center;
-              map.flyTo({ center: [lng, lat], zoom: 12 });
-              addNearbyProviders(lng, lat);
-            } else {
-              alert('Location not found. Try a different search term.');
-            }
-          })
-          .catch(err => {
-            console.error('Search error:', err);
-            alert('Search failed. Please try again.');
-          });
-      }
-    });
-  }
-
-  if (geoBtn) {
-    geoBtn.addEventListener('click', () => {
-      console.log('Geolocation button clicked');
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
-          const { longitude, latitude } = pos.coords;
-          console.log('Got location:', longitude, latitude);
-          map.flyTo({ center: [longitude, latitude], zoom: 12 });
-          addNearbyProviders(longitude, latitude);
-        }, (err) => {
-          console.error('Geolocation error:', err);
-          alert("Location access denied. Type a city instead.");
-        });
-      } else {
-        alert('Geolocation is not supported by this browser.');
-      }
-    });
-  }
-
-  // Load providers on map load
+  // Wait for map to load before adding event listeners
   map.on('load', () => {
+    // Load providers on map load
     addNearbyProviders(...defaultCenter);
+
+    // Custom event listeners - set up after map loads
+    const searchBtn = document.getElementById('search-btn');
+    const geoBtn = document.getElementById('geolocate-btn');
+    const locationInput = document.getElementById('location-input');
+
+    if (searchBtn && locationInput) {
+      searchBtn.addEventListener('click', () => {
+        const query = locationInput.value.trim();
+        if (query) {
+          searchBtn.disabled = true;
+          searchBtn.textContent = 'Searching...';
+          
+          // Use Mapbox Geocoding API directly
+          fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxgl.accessToken}`)
+            .then(response => response.json())
+            .then(data => {
+              searchBtn.disabled = false;
+              searchBtn.textContent = 'Search Location';
+              
+              if (data.features && data.features.length > 0) {
+                const [lng, lat] = data.features[0].center;
+                map.flyTo({ center: [lng, lat], zoom: 12 });
+                addNearbyProviders(lng, lat);
+              } else {
+                alert('Location not found. Try a different search term.');
+              }
+            })
+            .catch(err => {
+              console.error('Search error:', err);
+              searchBtn.disabled = false;
+              searchBtn.textContent = 'Search Location';
+              alert('Search failed. Please try again.');
+            });
+        } else {
+          alert('Please enter a location to search.');
+        }
+      });
+
+      // Also allow Enter key to trigger search
+      locationInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          searchBtn.click();
+        }
+      });
+    }
+
+    if (geoBtn) {
+      geoBtn.addEventListener('click', () => {
+        if (navigator.geolocation) {
+          geoBtn.disabled = true;
+          geoBtn.textContent = 'Locating...';
+          
+          navigator.geolocation.getCurrentPosition(pos => {
+            const { longitude, latitude } = pos.coords;
+            map.flyTo({ center: [longitude, latitude], zoom: 12 });
+            addNearbyProviders(longitude, latitude);
+            geoBtn.disabled = false;
+            geoBtn.textContent = 'Use My Location';
+          }, (err) => {
+            console.error('Geolocation error:', err);
+            geoBtn.disabled = false;
+            geoBtn.textContent = 'Use My Location';
+            alert("Location access denied. Type a city instead.");
+          });
+        } else {
+          alert('Geolocation is not supported by this browser.');
+        }
+      });
+    }
   });
 
-  // Listen for geocoder results
+  // Listen for geocoder results (from the built-in search box)
   geocoder.on('result', (e) => {
     const [lng, lat] = e.result.center;
     addNearbyProviders(lng, lat);
@@ -100,8 +119,10 @@ function initMap() {
 
 function addNearbyProviders(lng, lat) {
   console.log('Adding providers near:', lng, lat);
-  // Remove old markers
-  document.querySelectorAll('.custom-marker').forEach(m => m.remove());
+  
+  // Remove all existing markers
+  markers.forEach(marker => marker.remove());
+  markers = [];
 
   // Sample real-looking providers (you can expand this list!)
   const providers = [
@@ -124,16 +145,18 @@ function addNearbyProviders(lng, lat) {
         <h3 style="margin:0 0 0.5rem; color:#7ec8e3;">${provider.name}</h3>
         <p><strong>${provider.type}</strong></p>
         <p>📞 ${provider.phone}</p>
-        <button onclick="saveLocation('${provider.name}', ${provider.coords[0]}, ${provider.coords[1]})" 
+        <button onclick="saveLocation('${provider.name.replace(/'/g, "\\'")}', ${provider.coords[0]}, ${provider.coords[1]})" 
                 style="margin-top:0.8rem; padding:0.5rem 1rem; background:#7ec8e3; color:white; border:none; border-radius:8px; cursor:pointer;">
           Save This Location
         </button>
       `);
 
-    new mapboxgl.Marker(el)
+    const marker = new mapboxgl.Marker(el)
       .setLngLat(provider.coords)
       .setPopup(popup)
       .addTo(map);
+    
+    markers.push(marker); // Store marker reference
   });
 }
 
