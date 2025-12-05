@@ -6,6 +6,7 @@
   <title>Find Help Near You | HenMo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.css" type="text/css">
   <link rel="stylesheet" href="css/style.css" />
   <style>
     #map { height: 70vh; border-radius: 16px; margin: 2rem 0; }
@@ -63,10 +64,10 @@
     <p>Made with ❤️ by Henry Ugochukwu | You are not alone.</p>
   </footer>
 
+  <!-- Load Mapbox scripts first, then our module -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
   <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.min.js"></script>
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.css" type="text/css">
-
+  
   <script type="module" src="js/modules/map.js"></script>
 </body>
 </html>

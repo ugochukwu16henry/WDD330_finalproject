@@ -8,20 +8,45 @@ let markers = []; // Store all markers so we can remove them properly
 const defaultCenter = [-74.0059, 40.7128]; // Default: New York (will change to user)
 
 function initMap() {
-  map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v12',
-    center: defaultCenter,
-    zoom: 10
-  });
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) {
+    console.error('Map container not found!');
+    return;
+  }
 
-  // Add geocoder (search box)
-  const geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl,
-    placeholder: 'Search for a city...'
-  });
-  map.addControl(geocoder, 'top-left');
+  if (!mapboxgl.accessToken || mapboxgl.accessToken === 'YOUR_MAPBOX_TOKEN_HERE') {
+    console.error('Mapbox access token is not set!');
+    mapContainer.innerHTML = '<p style="padding:2rem; text-align:center; color:#e53e3e;">Error: Mapbox access token is missing. Please check your configuration.</p>';
+    return;
+  }
+
+  try {
+    map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: defaultCenter,
+      zoom: 10
+    });
+  } catch (error) {
+    console.error('Error creating map:', error);
+    mapContainer.innerHTML = '<p style="padding:2rem; text-align:center; color:#e53e3e;">Error creating map. Please check your Mapbox token.</p>';
+    return;
+  }
+
+  // Add geocoder (search box) if available
+  let geocoder = null;
+  if (typeof MapboxGeocoder !== 'undefined') {
+    try {
+      geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        placeholder: 'Search for a city...'
+      });
+      map.addControl(geocoder, 'top-left');
+    } catch (error) {
+      console.warn('Could not add geocoder:', error);
+    }
+  }
 
   // Add geolocation control
   map.addControl(
@@ -111,10 +136,12 @@ function initMap() {
   });
 
   // Listen for geocoder results (from the built-in search box)
-  geocoder.on('result', (e) => {
-    const [lng, lat] = e.result.center;
-    addNearbyProviders(lng, lat);
-  });
+  if (geocoder) {
+    geocoder.on('result', (e) => {
+      const [lng, lat] = e.result.center;
+      addNearbyProviders(lng, lat);
+    });
+  }
 }
 
 function addNearbyProviders(lng, lat) {
@@ -196,8 +223,38 @@ function loadSavedLocations() {
   `).join('');
 }
 
-// Initialize when DOM loads
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded, initializing map...');
-  initMap();
-});
+// Initialize when DOM loads and Mapbox is ready
+function initializeMapWhenReady() {
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) {
+    console.error('Map container not found');
+    return;
+  }
+
+  // Check if Mapbox is loaded, retry if not
+  if (typeof mapboxgl === 'undefined') {
+    console.log('Waiting for Mapbox GL JS to load...');
+    setTimeout(initializeMapWhenReady, 100);
+    return;
+  }
+  
+  console.log('Mapbox GL JS loaded, initializing map...');
+  
+  try {
+    initMap();
+  } catch (error) {
+    console.error('Error initializing map:', error);
+    mapContainer.innerHTML = '<p style="padding:2rem; text-align:center; color:#e53e3e;">Error loading map: ' + error.message + '</p>';
+  }
+}
+
+// Wait for DOM to be ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Give scripts a moment to load
+    setTimeout(initializeMapWhenReady, 200);
+  });
+} else {
+  // DOM is already ready
+  setTimeout(initializeMapWhenReady, 200);
+}
