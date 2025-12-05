@@ -1,13 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crisis - Mental Wellness App</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get Help Now | HenMo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .crisis-hero {
+      background: linear-gradient(135deg, #ff6b6b, #e53e3e);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-radius: 16px;
+      margin: 2rem 0;
+    }
+    .crisis-hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hotlines { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0; }
+    .hotline-card {
+      background: white;
+      color: #222;
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .phone-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e53e3e;
+      margin: 1rem 0;
+    }
+    .back-home {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 1rem 2rem;
+      background: white;
+      color: #e53e3e;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
-    <h1>Crisis Support</h1>
-    <script src="js/main.js"></script>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo">
+        <span class="logo__heart">❤️</span>
+        <h1>HenMo</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="find-help.html" class="nav__link">Find Help</a>
+        <a href="tracker.html" class="nav__link">Tracker</a>
+        <a href="education.html" class="nav__link">Learn</a>
+        <a href="saved.html" class="nav__link">♥ Saved</a>
+        <a href="crisis.html" class="nav__link crisis active">Get Help Now</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <div class="crisis-hero">
+      <h1>You Are Not Alone</h1>
+      <p style="font-size:1.4rem; opacity:0.95;">
+        If you're in crisis, please reach out right now.<br>
+        Someone is ready to listen — 24 hours a day, 7 days a week.
+      </p>
+    </div>
+    <div class="hotlines">
+      <div class="hotline-card">
+        <h3>🇺🇸 United States</h3>
+        <div class="phone-number">988</div>
+        <p>National Suicide & Crisis Lifeline<br><small>Call or text 988</small></p>
+      </div>
+      <div class="hotline-card">
+        <h3>🇳🇬 Nigeria</h3>
+        <div class="phone-number">0800-123-4567</div>
+        <p>Lagos Suicide Prevention Hotline<br><small>Free & confidential</small></p>
+      </div>
+      <div class="hotline-card">
+        <h3>🇬🇧 United Kingdom</h3>
+        <div class="phone-number">116 123</div>
+        <p>Samaritans<br><small>Available 24/7</small></p>
+      </div>
+      <div class="hotline-card">
+        <h3>🌍 International</h3>
+        <div class="phone-number">Find your country</div>
+        <p><a href="https://findahelpline.com" target="_blank" style="color:#e53e3e;">findahelpline.com</a><br>
+        <small>180+ countries • 60+ languages</small></p>
+      </div>
+    </div>
+    <p style="text-align:center; font-size:1.3rem; color:#666;">
+      You matter. Your life matters. Please stay.
+    </p>
+    <a href="index.html" class="back-home">← Back to Home</a>
+  </main>
+  <footer class="footer">
+    <p>Made with love by Henry Ugochukwu | You are worthy of help and healing.</p>
+  </footer>
 </body>
 </html>

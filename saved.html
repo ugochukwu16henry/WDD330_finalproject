@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saved Resources | HenMo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo"><span class="logo__heart">❤️</span><h1>HenMo</h1></div>
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="find-help.html" class="nav__link">Find Help</a>
+        <a href="tracker.html" class="nav__link">Tracker</a>
+        <a href="education.html" class="nav__link">Learn</a>
+        <a href="saved.html" class="nav__link active">♥ Saved</a>
+        <a href="crisis.html" class="nav__link crisis">Get Help Now</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <h1 class="page-title">Your Saved Resources</h1>
+    <p class="page-subtitle">Everything you've saved — quotes, books, and locations.</p>
+    <section class="card"><h2>♡ Saved Quotes</h2><div id="saved-quotes"></div></section>
+    <section class="card"><h2>📚 Saved Books</h2><div id="saved-books" class="books-grid"></div></section>
+    <section class="card"><h2>🧭 Saved Locations</h2><div id="saved-locations"></div></section>
+  </main>
+  <footer class="footer"><p>Made with ❤️ by Henry Ugochukwu</p></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const quotes = JSON.parse(localStorage.getItem('savedQuotes') || '[]');
+      const books = JSON.parse(localStorage.getItem('savedBooks') || '[]');
+      const locations = JSON.parse(localStorage.getItem('savedLocations') || '[]');
+      document.getElementById('saved-quotes').innerHTML = quotes.length ? 
+        quotes.map(q => `<p><strong>"${q.text}"</strong><br>— ${q.author} <small>(${q.savedAt})</small></p><hr>`).join('') : 
+        '<p>No saved quotes yet.</p>';
+      document.getElementById('saved-books').innerHTML = books.length ? 
+        books.map(b => `
+          <div class="book-card">
+            <img src="${b.image}" alt="${b.title}">
+            <div class="book-info">
+              <div class="book-title">${b.title}</div>
+              <div class="book-author">${b.author}</div>
+            </div>
+          </div>
+        `).join('') : '<p>No saved books yet.</p>';
+      document.getElementById('saved-locations').innerHTML = locations.length ?
+        locations.map(l => `<p><strong>${l.name}</strong> <small>Saved ${l.savedAt}</small></p>`).join('') :
+        '<p>No saved locations yet.</p>';
+    });
+  </script>
+</body>
+</html>
+

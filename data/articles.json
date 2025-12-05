@@ -1,3 +1,30 @@
-{
-  "articles": []
-}
+[
+  {
+    "title": "Understanding Anxiety: You're Not Broken",
+    "summary": "Learn what anxiety really is, why it happens, and gentle ways to work with it.",
+    "image": "https://images.unsplash.com/photo-1499721093270-1b84e605e881?w=800&q=80",
+    "readTime": "5 min",
+    "link": "articles/anxiety.html"
+  },
+  {
+    "title": "How to Practice Self-Compassion",
+    "summary": "Stop being your own worst critic. Start being your own best friend.",
+    "image": "https://images.unsplash.com/photo-1506126618532-937a1986f9f3?w=800&q=80",
+    "readTime": "6 min",
+    "link": "articles/self-compassion.html"
+  },
+  {
+    "title": "Building Healthy Relationships",
+    "summary": "From your Marriage & Family Studies knowledge — practical tips for stronger bonds.",
+    "image": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80",
+    "readTime": "8 min",
+    "link": "articles/relationships.html"
+  },
+  {
+    "title": "Coping with Depression: Small Steps That Help",
+    "summary": "Evidence-based strategies that actually work when you're feeling low.",
+    "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80",
+    "readTime": "7 min",
+    "link": "articles/depression.html"
+  }
+]

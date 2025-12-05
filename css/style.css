@@ -305,3 +305,121 @@ input[type="range"] {
 @media (max-width: 768px) {
   .charts { grid-template-columns: 1fr; }
 }
+
+/* Education Page Styles */
+.search-section {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+}
+
+#book-search {
+  width: 70%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+}
+
+#search-books-btn {
+  width: 25%;
+  margin-left: 1rem;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.book-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+}
+
+.book-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.book-info {
+  padding: 1.5rem;
+}
+
+.book-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--sky-blue);
+}
+
+.book-author {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.save-book-btn {
+  background: var(--mint-green);
+  color: #222;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.article-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s;
+}
+
+.article-card:hover {
+  transform: translateY(-8px);
+}
+
+.article-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.article-content {
+  padding: 1.5rem;
+}
+
+.article-card h3 {
+  color: var(--sky-blue);
+  margin-bottom: 0.8rem;
+}
+
+.read-more {
+  color: var(--sky-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  #book-search, #search-books-btn { width: 100%; margin: 0.5rem 0; }
+}
